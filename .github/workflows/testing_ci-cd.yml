@@ -1,4 +1,4 @@
-name: testing the first ci-cd setup
+name: Testing the first CI-CD setup
 
 on:
   push:
@@ -6,56 +6,42 @@ on:
       - development
 
 jobs:
-  build:                                        # we can give the any name for jobs ex: build, dev-deploy
-    name: initial build
-    runs-on:  self-hosted                      # runner name
+  build:
+    name: Build & Install
+    runs-on: self-hosted
 
-  strategy:
-    matrix:
-      python-version:["pypy3.10", "3.9", "3.10", "3.11", "3.12"]    # this whole block is used to which version it support
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
 
-  steps:
-    - uses: actions/checkout@v5                  # it checkouts default main to given branch  main --> development
+      - name: Verify virtual environment
+        run: |
+          if [ ! -x "/home/prajwal/py-venv/bin/python" ]; then
+            echo "py-venv is missing or broken"
+            exit 1
+          fi
 
-    - name: use python ${{matrix.python-version}}
-      uses: actions/setup-python@v5
-      with:
-        python-version:${{matrix.python-version}}
+      - name: Install dependencies
+        run: |
+          cd /home/prajwal/ci-cd-test
+          /home/prajwal/py-venv/bin/python -m pip install --upgrade pip
+          /home/prajwal/py-venv/bin/pip install -r requirements.txt
 
-    - name: Display pyhton version
-      run: python -c "import sys; print(sys.version)"
-
-    - name: Activate vertual enviroment
-      run: source py-venv/bin/activate
-           
-    - name:  Install dependencies
-      run: |
-          cd ci-cd-test
-          pwd
-          sudo git branch
-          python -m pip install --upgrade pip
-          python -m pip install -r requirement.txt
-          echo "Dependencies installed Successfully"
-
-
-
+      - name: Test imports
+        run: |
+          /home/prajwal/py-venv/bin/python -c "import sqlalchemy, pandas; print('OK')"
 
   dev_deploy:
-    name: Deploying to development server
-    run-on: self-hosted
+    name: Deploy
+    runs-on: self-hosted
     needs: build
 
     steps:
-      - name: checkout repository
-        uses: action/checkout@v5
-      
-      - name: deploy
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Run application
         run: |
-         cd ci-cd-test
-         pwd
-         git pull origin development
-         echo "Deployment completed"
-    
-
-
-
+          cd /home/prajwal/ci-cd-test
+          pwd
+          echo "Deployment completed"
