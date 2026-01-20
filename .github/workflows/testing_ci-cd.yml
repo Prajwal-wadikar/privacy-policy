@@ -44,6 +44,5 @@ jobs:
         run: |
           cd /home/prajwal/ci-cd-test/privacy-policy
           pwd
-          /home/prajwal/py-venv/bin/python first_dag.py
           echo "Deployment completed"
           
