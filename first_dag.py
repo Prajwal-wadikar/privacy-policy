@@ -40,4 +40,4 @@ with DAG(
     )
 
 
-    task1>>task2
+    task1 >> task2
