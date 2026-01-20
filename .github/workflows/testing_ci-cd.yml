@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd /home/prajwal/ci-cd-test
+          cd /home/prajwal/ci-cd-test/privacy-policy
           /home/prajwal/py-venv/bin/python -m pip install --upgrade pip
           /home/prajwal/py-venv/bin/pip install -r requirements.txt
 
@@ -40,8 +40,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Run application
+      - name: Deploy
         run: |
-          cd /home/prajwal/ci-cd-test
+          cd /home/prajwal/ci-cd-test/privacy-policy
           pwd
+          /home/prajwal/py-venv/bin/python first_dag.py
           echo "Deployment completed"
+          
