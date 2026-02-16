@@ -1,0 +1,1579 @@
+{
+	"info": {
+		"_postman_id": "2781110c-5a33-422e-8bd1-c1732cde29bd",
+		"name": "confluence",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "space_curd",
+			"item": [
+				{
+					"name": "create-space",
+					"id": "b02ae272-21e0-4410-bdb6-2b6732302495",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_name\": \"x\", //*\r\n    \"space_type\": \"work_hub\", //work_hub, knowledge_hub, custom, default //*\r\n    \"description\": \"work_hub related documentation\",\r\n    \"categories\": [\r\n        1\r\n    ], //work_hub =1, knowledge_hub = 2, custom =3, default=4\r\n    \"space_icon_id\": 5,\r\n    \"blogs\": 1,\r\n    \"live_docs\": 1,\r\n    \"whiteboards\": 1,\r\n    \"databases_enabled\": 0,\r\n    \"smart_links\": 1,\r\n    \"folders\": 1,\r\n    \"is_default\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/spaces/create-space"
+					},
+					"response": []
+				},
+				{
+					"name": "update-space",
+					"id": "f259ddc2-31d3-444c-9f4b-1567ea43557a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"space_id\":20,\r\n    \"description\": \"27-01-26 work hub hub related documentation\",\r\n    \"space_icon_id\": 10,\r\n    \"watch\": 0,\r\n    \"star\":0,\r\n    \"space_status\":\"Active\", //'Active','Archived'\r\n    \"is_active\":1  // Active = 1, Archived = 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/spaces/update-space"
+					},
+					"response": []
+				},
+				{
+					"name": "create-and-update-space-labels",
+					"id": "308713b1-9cca-4c61-b26f-3c7d382e7051",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"space_id\": 1,\r\n  \"new_label_name\": [],\r\n  \"labels_id\": [4,5] // newlabel id to be added\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/spaces/create-and-update-space-labels"
+					},
+					"response": []
+				},
+				{
+					"name": "get-org-labels",
+					"id": "cf02140d-7d44-47af-915f-3f5aae1a81d1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/Confluence/spaces/get-org-labels"
+					},
+					"response": []
+				},
+				{
+					"name": "remove-space-labels",
+					"id": "d02341ac-cdb6-45b8-b1f8-97994835fa89",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"space_id\": 1,\r\n  \"label_id\": [5,4,6]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/spaces/remove-space-labels"
+					},
+					"response": []
+				},
+				{
+					"name": "space-details-by-id",
+					"id": "b7d4b882-38ea-43cb-944e-11d0030a0a2f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/spaces/space-details-by-id?space_id=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"spaces",
+								"space-details-by-id"
+							],
+							"query": [
+								{
+									"key": "space_id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "space-filter",
+					"id": "743e57ac-5944-41a8-b1bb-4e47979efa09",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/spaces/space-filter?filter_type=Personal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"spaces",
+								"space-filter"
+							],
+							"query": [
+								{
+									"key": "filter_type",
+									"value": "Personal"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "spaces/your-spaces",
+					"id": "da4e1257-8b5a-4392-b596-b34b747c4215",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/Confluence/spaces/your-spaces"
+					},
+					"response": []
+				},
+				{
+					"name": "get-archived-space",
+					"id": "aa3f68d1-0862-4c8e-ae56-62b3d20454b1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/Confluence/spaces/get-archived-space"
+					},
+					"response": []
+				},
+				{
+					"name": "get-trashed-space",
+					"id": "f26f9ffa-b539-47bf-be29-641abdef3504",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/Confluence/spaces/get-trashed-space"
+					},
+					"response": []
+				},
+				{
+					"name": "Activate-or-Move-to-Trash",
+					"id": "e5a1e476-dc3e-437d-a9b5-a60dbd7d5e64",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"space_id\": 10,\r\n  \"space_status\":\"Deleted\" // Deleted, Activate\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api//Confluence/spaces/Activate-or-Move-to-Trash"
+					},
+					"response": []
+				},
+				{
+					"name": "spaces/Logos",
+					"id": "c2d69c60-84f1-452a-adce-14531590846e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"key": "tokenid",
+								"value": "{{auth_token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8088/api/Confluence/spaces/Logos"
+					},
+					"response": []
+				}
+			],
+			"id": "de7182ac-41d0-46fc-9cac-60c9ea66cd4c"
+		},
+		{
+			"name": "content",
+			"item": [
+				{
+					"name": "content/Star-Shortcuts",
+					"id": "068d5ee9-d2de-4e37-843a-30c274de0533",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\":35 ,\r\n    \"item_id\":93,\r\n    \"action\":\"star\",          //star,shortcut,\r\n    \"item_type\": \"page\"  //page, template, whiteboard, database, smart_link, live_doc\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/content/Star-Shortcuts"
+					},
+					"response": []
+				},
+				{
+					"name": "content/Rename",
+					"id": "4d5ccd3e-dd9e-4aaa-9968-db006ec0bddb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\":24 ,\r\n    \"item_id\":17,\r\n    \"item_type\": \"page\", //folder, page, template, whiteboard, database, smart_link, live_doc\r\n    \"title\":\"page1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/content/Rename"
+					},
+					"response": []
+				},
+				{
+					"name": "content/Draft-page",
+					"id": "7be8e193-ff7b-43af-ad3b-803d3a7ba8a5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\":35 ,\r\n    \"parent_id\":88,\r\n    \"title\":\"draft1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/content/Draft-page"
+					},
+					"response": []
+				},
+				{
+					"name": "content/Create-folder",
+					"id": "6e709dcf-3a7e-4a36-9393-5a09d611a17a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\":35 ,\r\n    \"parent_id\":82,\r\n    \"title\":\"space data\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/content/Create-folder"
+					},
+					"response": []
+				},
+				{
+					"name": "content/Drag-and-Drop",
+					"id": "bcebf80d-5393-40f3-afbb-e63092849537",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\":24 ,\r\n    \"item_id\":31,\r\n    \"parent_id\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/content/Drag-and-Drop"
+					},
+					"response": []
+				},
+				{
+					"name": "content/Page-Publish",
+					"id": "45a8b26a-73b9-4003-917c-5d759f7e0a76",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\":35 ,\r\n    \"item_id\":86,\r\n    \"item_type\": \"page\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/content/Page-Publish"
+					},
+					"response": []
+				},
+				{
+					"name": "content/Edit",
+					"id": "22a81166-c4d4-4407-81d1-894fd994044c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\": 35,\r\n    \"item_id\": 86,\r\n    \"content\": {\"blocks\": [\r\n        {\r\n            \"text\": \"✅ checking permission for user\",\r\n            \"type\": \"heading\",\r\n            \"level\": 1\r\n        }]\r\n}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/content/Edit"
+					},
+					"response": []
+				},
+				{
+					"name": "Get-Item-Version-History",
+					"id": "54987547-7770-405e-b91a-321428dcc8a1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/spaces/:spaceId/items/:itemId/version-history/:itemtype",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"spaces",
+								":spaceId",
+								"items",
+								":itemId",
+								"version-history",
+								":itemtype"
+							],
+							"variable": [
+								{
+									"key": "spaceId",
+									"value": "24"
+								},
+								{
+									"key": "itemId",
+									"value": "14"
+								},
+								{
+									"key": "itemtype",
+									"value": "template"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete-Item-Version",
+					"id": "20677659-0468-4ad3-8bea-bf2c2fa6c8f1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\": 24,\r\n    \"item_id\": 14,\r\n    \"version_id\":30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/content/Delete-Item-Version"
+					},
+					"response": []
+				},
+				{
+					"name": "Get-Shortcut-Items",
+					"id": "310fade4-2bd4-4137-813b-f30b4cef7328",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/content/Get-Shortcut-Items?space_id=24",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"content",
+								"Get-Shortcut-Items"
+							],
+							"query": [
+								{
+									"key": "space_id",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore-Item-Version",
+					"id": "95291d2d-1a94-4cea-ac63-d051d23087e9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\": 24,\r\n    \"item_id\": 33,\r\n    \"version_number\": 1,\r\n    \"version_id\": 26\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/content/Restore-Item-Version"
+					},
+					"response": []
+				},
+				{
+					"name": "create duplicate item",
+					"id": "b3293720-d28b-4cb2-ad79-80ea40ff4eef",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"space_id\":24,\r\n//   \"item_id\": 67,\r\n//   \"is_child\": \"no\",\r\n//   \"parent_id\": 73,\r\n//   \"startname\": \"j11\"\r\n// }\r\n{\r\n    \"space_id\": 35,\r\n    \"item_id\": 86,\r\n    \"is_child\": \"no\",\r\n    \"parent_id\": 91,\r\n    \"startname\": \"B \"\r\n}\r\n// {\r\n//     \"space_id\":24,\r\n//   \"item_id\": 67,\r\n//   \"is_child\": \"yes\",\r\n//   \"parent_id\": null,\r\n//   \"startname\": \"j1\"\r\n// }\r\n// {\r\n//     \"space_id\":24,\r\n//   \"item_id\": 67,\r\n//   \"is_child\": \"yes\",\r\n//   \"parent_id\": 73,\r\n//   \"startname\": \"j1\"\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/space/create_duplicate_item"
+					},
+					"response": []
+				},
+				{
+					"name": "Update-Item-Status-Archive-Or-Delete",
+					"id": "d3861346-9e3d-418b-b083-4bea6fd1f696",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"space_id\": 35,\r\n  \"item_id\": 93,\r\n  \"status_type\": \"deleted\",   // \"archived\" or \"deleted\"\r\n  \"nested_item\": \"yes\"         // yes / no\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/content/Update-Item-Status-Archive-Or-Delete"
+					},
+					"response": []
+				},
+				{
+					"name": "Get-Space-Item-List",
+					"id": "0fc4264d-7893-48dd-ace4-a7edb5f6a6c3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/content/Get-Space-Item-List?space_id=35",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"content",
+								"Get-Space-Item-List"
+							],
+							"query": [
+								{
+									"key": "space_id",
+									"value": "35"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "ed3939f8-87d4-4f46-ae34-db4647e10fee"
+		},
+		{
+			"name": "invite",
+			"item": [
+				{
+					"name": "invite-user",
+					"id": "ca12c76d-3fdc-4d18-8115-391d11d50a48",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mahadevj2618@gmail.com\", \r\n   \"space_id\":1, \r\n    \"role_id\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/invite-user"
+					},
+					"response": []
+				},
+				{
+					"name": "accept-invite",
+					"id": "de9738b1-8b0e-4ff3-9cda-08c8601ae8fc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\":\"1a3a0f92576d1f3febccbda062a841135acd7bd2680a65514c7866a3f0d4e077\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/accept-invite"
+					},
+					"response": []
+				},
+				{
+					"name": "add-user-to-space",
+					"id": "cb77f24a-3d27-45c4-8c46-476fa2ea5715",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":191, \r\n    \"space_id\":24, \r\n    \"role_id\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/add-user-to-space"
+					},
+					"response": []
+				}
+			],
+			"id": "4a563c5f-f704-4f0e-8fa9-791de9b08431"
+		},
+		{
+			"name": "share_management",
+			"item": [
+				{
+					"name": "remove share permission Copy",
+					"id": "03944184-6e68-47d9-a56c-caca626326cc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "item_id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "270",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/:space_id/nodes/:item_id/permissions/:user_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								":space_id",
+								"nodes",
+								":item_id",
+								"permissions",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "space_id",
+									"value": "24"
+								},
+								{
+									"key": "item_id",
+									"value": "32"
+								},
+								{
+									"key": "user_id",
+									"value": "192"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "share folder Copy",
+					"id": "4f652d26-0817-4429-8157-2b14d730493b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "item_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":270, \r\n    \"space_id\":1, \r\n    // \"item_id\":1, \r\n    // \"role\": \"editor\"\r\n    \"role\": \"viewer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/nodes/10/share"
+					},
+					"response": []
+				},
+				{
+					"name": "get all doc/folder like tree structure for admin and list for member Copy",
+					"id": "ce04df7a-76ff-4229-803f-ed0dadb84529",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "item_id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "270",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"space_id\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/space/:space_id/get-all-documents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"space",
+								":space_id",
+								"get-all-documents"
+							],
+							"variable": [
+								{
+									"key": "space_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by sharelink Copy",
+					"id": "be3d1c93-5df1-485a-ab4f-0ad79e05f74f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "item_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"space_id\":1, \r\n    \"item_id\":8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/:space_id/nodes/share/:item_id/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								":space_id",
+								"nodes",
+								"share",
+								":item_id",
+								"check"
+							],
+							"variable": [
+								{
+									"key": "space_id",
+									"value": "1"
+								},
+								{
+									"key": "item_id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "69ce6726-5397-4670-913a-3f549e6239b7"
+		},
+		{
+			"name": "space_attachment",
+			"item": [
+				{
+					"name": "add attachment Copy",
+					"id": "30d4e9c1-07b7-4105-8977-27f9c7bad11f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "item_id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "270",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "space_id",
+									"value": "1",
+									"type": "text",
+									"uuid": "116652c3-87c0-489a-99ea-4d0d38550ba4"
+								},
+								{
+									"key": "item_id",
+									"value": "1",
+									"type": "text",
+									"uuid": "aab0c8e2-5427-4af2-b904-4916995f1d69"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"uuid": "8a005480-4c96-4e4a-adf7-4ed538f5a9d6",
+									"src": "/C:/Users/mahad/Downloads/story.pdf"
+								}
+							]
+						},
+						"url": "http://localhost:8088/api/Confluence/space/doc/attachment"
+					},
+					"response": []
+				},
+				{
+					"name": "get -attachment Copy",
+					"id": "b146ba21-90e6-4ec7-9692-ad4443417142",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "item_id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "270",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "space_id",
+									"value": "1",
+									"type": "text",
+									"uuid": "116652c3-87c0-489a-99ea-4d0d38550ba4"
+								},
+								{
+									"key": "item_id",
+									"value": "1",
+									"type": "text",
+									"uuid": "aab0c8e2-5427-4af2-b904-4916995f1d69"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"uuid": "8a005480-4c96-4e4a-adf7-4ed538f5a9d6",
+									"src": "/C:/Users/mahad/Downloads/warning-pjuc6uf259wmgohj.jpg"
+								}
+							]
+						},
+						"url": "http://localhost:8088/api/Confluence/attachment/1/1"
+					},
+					"response": []
+				},
+				{
+					"name": "delete attachament Copy",
+					"id": "4dd00f46-882d-4ce9-857d-48e6276a6164",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": ""
+					},
+					"response": []
+				}
+			],
+			"id": "a79d1736-72d7-42ab-ac79-d1517e0e9156"
+		},
+		{
+			"name": "page level / inline comments",
+			"item": [
+				{
+					"name": "add comments",
+					"id": "dc162a23-5ce8-4d4b-b3b7-fe561561e8dc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "item_id",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "270",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"space_id\": 1,\r\n  \"item_id\": 1,\r\n  \"parent_comment_id\": null,\r\n  \"type\": \"page\",\r\n  \"inline_position\": null,\r\n  \"content\": \"testing comments\",\r\n  \"mentions\": [272],\r\n  \"sharePageLink\" : \"https://nubaxpulse.nubaxdatalabs.com/admin/taskBoard/8\",\r\n  \"shareCommentLink\":\"https://chatgpt.com/?openaicom_referred=true\",\r\n  \"assigner_avatar\": [\r\n        {\r\n            \"assigner_avatar_code\": \"SJ\",\r\n            \"assigner_avatar_color_code\": \"rgb(45, 186, 189)\"\r\n        }\r\n    ]\r\n}\r\n\r\n// {\r\n//   \"space_id\": 1,\r\n//   \"item_id\": 25,\r\n//   \"parent_comment_id\": 2,\r\n//   \"type\": \"inline\",\r\n//   \"inline_position\": {\r\n//                 \"block_id\": \"p_17\",\r\n//                 \"start_offset\": 12,\r\n//                 \"end_offset\": 42\r\n//                 },\r\n//   \"content\": \"inline\",\r\n//   \"mentions\": [15],\r\n// \"assigner_avatar\": [\r\n//         {\r\n//             \"assigner_avatar_code\": \"SJ\",\r\n//             \"assigner_avatar_color_code\": \"rgb(45, 186, 189)\"\r\n//         }\r\n//     ]\r\n// }\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/space/doc/comment"
+					},
+					"response": []
+				},
+				{
+					"name": "get comments",
+					"id": "7b105d55-146f-491b-a5fd-e558b99f1d88",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"space_id\": 1,\r\n      \"item_id\": 1,\r\n      \"type\": \"page\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/space/:space_id/item/:item_id/type/:type/get-comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"space",
+								":space_id",
+								"item",
+								":item_id",
+								"type",
+								":type",
+								"get-comment"
+							],
+							"variable": [
+								{
+									"key": "space_id",
+									"value": "1"
+								},
+								{
+									"key": "item_id",
+									"value": "1"
+								},
+								{
+									"key": "type",
+									"value": "inline"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update comments",
+					"id": "65f1169c-319b-4bbc-b9ad-20011badec3e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"id\":3,\r\n    \"space_id\": 1,\r\n    \"item_id\": 1,\r\n    \"content\":\"do work mr.mj\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8088/api/Confluence/space/item/update-comment"
+					},
+					"response": []
+				},
+				{
+					"name": "delete comments",
+					"id": "b61205e7-c36e-4704-a858-15ee7d164b60",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"id\":5,\r\n    \"space_id\": 1,\r\n    \"item_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/spaces/:space_id/items/:item_id/comments/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"spaces",
+								":space_id",
+								"items",
+								":item_id",
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "space_id",
+									"value": "1"
+								},
+								{
+									"key": "item_id",
+									"value": "1"
+								},
+								{
+									"key": "id",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all comments",
+					"id": "d7feb24f-ad0a-4ea3-850b-e4b06688d6e4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/space/:space_id/item/:item_id/get-all-comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"space",
+								":space_id",
+								"item",
+								":item_id",
+								"get-all-comment"
+							],
+							"variable": [
+								{
+									"key": "space_id",
+									"value": "1"
+								},
+								{
+									"key": "item_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "0d615c2a-90dc-48a7-997a-857affd0bd48"
+		},
+		{
+			"name": "setting",
+			"item": [
+				{
+					"name": "Get-Archived-Space-ItemTree",
+					"id": "64bf6c6d-821e-422d-ab07-d62e5f70c598",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/settings/Get-Archived-Space-ItemTree?space_id=35",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"settings",
+								"Get-Archived-Space-ItemTree"
+							],
+							"query": [
+								{
+									"key": "space_id",
+									"value": "35"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-Trash-Space-ItemTree",
+					"id": "695b5609-a873-4c91-bcba-7c1c5c64dfc5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "{{auth_token}}",
+								"key": "tokenid"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/api/Confluence/settings/Get-Trash-Space-ItemTree?space_id=35",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"Confluence",
+								"settings",
+								"Get-Trash-Space-ItemTree"
+							],
+							"query": [
+								{
+									"key": "space_id",
+									"value": "35"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "951e0315-2c7b-428b-8a09-5ba19210e18d"
+		}
+	]
+}
